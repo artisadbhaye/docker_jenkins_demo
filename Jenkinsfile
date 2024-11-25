@@ -10,7 +10,7 @@ pipeline {
 			steps {
 				script {
 					try {
-						git branch: 'main', url: GIT_REPOSITORY_URL
+						git branch: 'master', url: GIT_REPOSITORY_URL
 					} catch (Exception e) {
 						echo "Failed to clone repo: ${e.message}"
 						echo "Failed to clone repo"
@@ -38,7 +38,7 @@ pipeline {
                                                 withCredentials([usernamePassword(credentialsId: 'ditiss-docker', usernameVariable: 'aartisadbhaye1', passwordVariable: 'ditiss@123')]) {
 							//Explicit login before push
 							sh """
-							echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
+							docker login -u aartisadbhaye1 -p ditiss@123
 							docker push ${DOCKER_IMAGE_NAME}:${IMAGE_TAG}
 							"""
 						}
